@@ -48,7 +48,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
     println!("Prepared interface configuration: {interface_config:?}");
 
-    // apply initial interface configuration
     #[cfg(not(windows))]
     wgapi.configure_interface(&interface_config)?;
     #[cfg(windows)]
