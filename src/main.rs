@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use defguard_wireguard_rs::{
-    InterfaceConfiguration, Userspace, WGApi, WireguardInterfaceApi, host::Peer, key::Key,
+    InterfaceConfiguration, Kernel, Userspace, WGApi, WireguardInterfaceApi, host::Peer, key::Key,
     net::IpAddrMask,
 };
 use x25519_dalek::{EphemeralSecret, PublicKey};
@@ -48,6 +48,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
     println!("Prepared interface configuration: {interface_config:?}");
 
+    // apply initial interface configuration
     #[cfg(not(windows))]
     wgapi.configure_interface(&interface_config)?;
     #[cfg(windows)]
